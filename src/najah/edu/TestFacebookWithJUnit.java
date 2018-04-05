@@ -25,6 +25,6 @@ public class TestFacebookWithJUnit {
 		driver.manage().window().maximize();
 		driver.findElement(By.xpath(".//*[@id='email']")).sendKeys("shunnar.ruba@gmail.com");
 		driver.findElement(By.xpath(".//*[@id='pass']")).sendKeys("52fitness");
-		driver.findElement(By.xpath(".//*[@id='u_0_2']")).submit();
+		driver.findElement(By.xpath(".//*[@id='u_0_u']")).submit();
 	}
 }

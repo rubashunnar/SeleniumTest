@@ -2,6 +2,7 @@
 <property name="src.java.dir" location="./src/najah/edu"/>
 <property name="result.dir" location="./target"/>
 <property name="result.javaclasses.dir" location="${result.dir}/classes"/>
+	
 <!-- Defining the SonarQube properties-->
 	<property name="sonar.jdbc.username" value="sonar"/>
 	<property name="sonar.jdbc.password" value="sonar"/>
@@ -29,4 +30,7 @@ includeantruntime="false">
 	
 </target>
 	<target name="all" depends="compile,sonar"/>
+	
+	
 </project>
+
