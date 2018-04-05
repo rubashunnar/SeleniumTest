@@ -3,6 +3,14 @@
 <property name="result.dir" location="./target"/>
 <property name="result.javaclasses.dir" location="${result.dir}/classes"/>
 	
+	
+	<path id="NecessaryLibraries">
+	<pathelement location="./MyLibraries/junit-4.0.jar"/>
+	<pathelement
+	location="./MyLibraries/selenium-server-standalone-3.9.1.jar"/>
+	</path>
+	
+	
 <!-- Defining the SonarQube properties-->
 	<property name="sonar.jdbc.username" value="sonar"/>
 	<property name="sonar.jdbc.password" value="sonar"/>
@@ -18,18 +26,38 @@
 <mkdir dir="${result.javaclasses.dir}"/>
 <javac srcdir="${src.java.dir}" destdir="${result.javaclasses.dir}" debug="true"
 includeantruntime="false">
+	<classpath>
+	<path refid="NecessaryLibraries"/>
+	<pathelement location="${result.javaclasses.dir}"/>
+	</classpath>
 </javac>
-	
-	
 </target>
+	
+	<target name="test" depends="compile">
+	<!--fork : each test will run in its own JVM (to seperate test cases)-->
+	<junit printsummary="true" haltonfailure="true" fork="true">
+	<classpath>
+	<path refid="NecessaryLibraries"></path>
+	<pathelement location="${result.javaclasses.dir}"/>
+	</classpath>
+	<formatter type="brief" usefile="false"/>
+	<batchtest>
+	<fileset dir="${result.javaclasses.dir}" >
+	<include name="**/*TestFacebookWithJUnit.class"/>
+	</fileset>
+	</batchtest>
+	</junit>
+	</target>
+	
 <target name="sonar" depends="compile">
 	<taskdef uri="antlib:org.sonar.ant" resource="org/sonar/ant/antlib.xml">
-	<classpath path="C:\\Users\\rubas\\Downloads\\sonarqube-7.0\\lib\\scanner\\sonar-scanner-engine-shaded-7.0.jar"/>	
+	<classpath path="C:Users/rubas/Downloads/sonarqube-7.0/lib/scanner/sonar-scanner-engine-shaded-7.0.jar"/>	
 	</taskdef>
 	
 	
+
 </target>
-	<target name="all" depends="compile,sonar"/>
+	<target name="all" depends="compile,sonar,test"/>
 	
 	
 </project>
