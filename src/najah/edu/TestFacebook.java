@@ -6,7 +6,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
 public class TestFacebook {
-	
+	// TODO Auto-generated method stub
 	static WebDriver driver;
 	public static void main(String []ar) {
 		System.setProperty("webdriver.gecko.driver","gecko\\geckodriver.exe");
