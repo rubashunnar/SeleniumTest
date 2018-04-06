@@ -1,4 +1,4 @@
-<project default="all" basedir="." xmlns:sonar="antlib.org.sonar.ant">
+<project default="all" basedir="." xmlns:sonar="antlib:org.sonar.ant">
 <property name="src.java.dir" location="./src/najah/edu"/>
 <property name="result.dir" location="./target"/>
 <property name="result.javaclasses.dir" location="${result.dir}/classes"/>
@@ -33,31 +33,14 @@ includeantruntime="false">
 </javac>
 </target>
 	
-	<target name="test" depends="compile">
-	<!--fork : each test will run in its own JVM (to seperate test cases)-->
-	<junit printsummary="true" haltonfailure="true" fork="true">
-	<classpath>
-	<path refid="NecessaryLibraries"></path>
-	<pathelement location="${result.javaclasses.dir}"/>
-	</classpath>
-	<formatter type="brief" usefile="false"/>
-	<batchtest>
-	<fileset dir="${result.javaclasses.dir}" >
-	<include name="**/*TestFacebookWithJUnit.class"/>
-	</fileset>
-	</batchtest>
-	</junit>
-	</target>
-	
 <target name="sonar" depends="compile">
 	<taskdef uri="antlib:org.sonar.ant" resource="org/sonar/ant/antlib.xml">
 	<classpath path="C:Users/rubas/Downloads/sonarqube-7.0/lib/scanner/sonar-scanner-engine-shaded-7.0.jar"/>	
 	</taskdef>
-	
-	
-
+	<sonar:sonar />
 </target>
-	<target name="all" depends="compile,sonar,test"/>
+	
+<target name="all" depends="compile,sonar"/>
 	
 	
 </project>
